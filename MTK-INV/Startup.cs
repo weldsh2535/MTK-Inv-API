@@ -1,13 +1,17 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using MTK_Delivery;
 using MTK_Inv.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MTK_Inv
@@ -26,6 +30,24 @@ namespace MTK_Inv
         {
 
             services.AddControllersWithViews();
+            var key = "This is my test key";
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x=>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)),
+                    ValidateAudience = false,
+                    ValidateIssuer = false
+                };
+            });
+            services.AddSingleton<IJwtAuthenticationManager>(new JwtAuthenticationManager(key));
             services.AddDbContext<dataContext>
            (o => o.UseSqlServer(Configuration.
             GetConnectionString("MtkInv-Con")));
@@ -51,7 +73,7 @@ namespace MTK_Inv
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

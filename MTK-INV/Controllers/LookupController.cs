@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
@@ -13,6 +14,7 @@ using Newtonsoft.Json;
 
 namespace MTK_Inv.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class LookupController : Controller

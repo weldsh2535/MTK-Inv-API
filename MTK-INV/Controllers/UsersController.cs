@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MTK_Delivery;
 using MTK_Inv.Models;
 
 namespace MTK_Inv.Controllers
@@ -14,9 +16,10 @@ namespace MTK_Inv.Controllers
     public class UsersController : Controller
     {
         private readonly dataContext _context;
-
-        public UsersController(dataContext context)
+        private readonly IJwtAuthenticationManager jwtAuthenticationManager;
+        public UsersController(dataContext context, IJwtAuthenticationManager jwtAuthenticationManager)
         {
+            this.jwtAuthenticationManager = jwtAuthenticationManager;
             _context = context;
         }
 
@@ -26,18 +29,28 @@ namespace MTK_Inv.Controllers
         {
             return Json(await _context.users.ToArrayAsync());
         }
-        [HttpPost]
-        public async Task<IActionResult> Post(Users users)
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public async Task<IActionResult> Authenticate(Users users)
         {
-            if (users.id == 0)
-            {
-                _context.Add(users);
-                await _context.SaveChangesAsync();
-            }
-            _context.Add(users);
-            await _context.SaveChangesAsync();
-            return new JsonResult("Added Successfully");
+            var token = jwtAuthenticationManager.Authenticate(users.username, users.password);
+            if (token == null)
+                return Unauthorized();
+            return Json(token);
         }
+      
+        //[HttpPost]
+        //public async Task<IActionResult> Post(Users users)
+        //{
+        //    if (users.id == 0)
+        //    {
+        //        _context.Add(users);
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    _context.Add(users);
+        //    await _context.SaveChangesAsync();
+        //    return new JsonResult("Added Successfully");
+        //}
 
         [HttpPut]
         public async Task<IActionResult> Put(Users users)

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MTK_Inv.Models;
 using System;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace MTK_Inv.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ItemStoreBalanceController : Controller
