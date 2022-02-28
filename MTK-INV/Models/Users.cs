@@ -14,10 +14,14 @@ namespace MTK_Inv.Models
         [Required]
         public int id { get; set; }
         [Required]
-        public string userId { get; set; }
+        public string firstName { get; set; }
         [Required]
-        public string empId { get; set; }
-        public string username { get; set; }
+        public string lastName { get; set; }
+        [Required]
+        public string phonenumber { get; set; }
+        public string email { get; set; }
         public string password { get; set; }
+        public string type { get; set; }
+        public DateTime registeredAt { get; set; }
     }
 }

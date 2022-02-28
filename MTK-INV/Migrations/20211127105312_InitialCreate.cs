@@ -93,10 +93,13 @@ namespace MTK_Delivery.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    userId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    empId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    username = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    password = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    firstName = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    lastName = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    phonenumber = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    email = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    type = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    registeredAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    password = table.Column<string>(type: "nvarchar(50)", nullable: true)
                 },
                 constraints: table =>
                 {
