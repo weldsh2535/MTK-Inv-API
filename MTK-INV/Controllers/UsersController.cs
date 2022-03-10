@@ -11,6 +11,7 @@ using MTK_Inv.Models;
 
 namespace MTK_Inv.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : Controller
@@ -33,24 +34,20 @@ namespace MTK_Inv.Controllers
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate(Users users)
         {
-            var token = jwtAuthenticationManager.Authenticate(users.username, users.password);
+            var token = jwtAuthenticationManager.Authenticate(users.phonenumber, users.password);
             if (token == null)
                 return Unauthorized();
             return Json(token);
         }
-      
-        //[HttpPost]
-        //public async Task<IActionResult> Post(Users users)
-        //{
-        //    if (users.id == 0)
-        //    {
-        //        _context.Add(users);
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    _context.Add(users);
-        //    await _context.SaveChangesAsync();
-        //    return new JsonResult("Added Successfully");
-        //}
+
+        [HttpPost]
+        public async Task<IActionResult> Post(Users users)
+        {
+           
+            _context.Add(users);
+            await _context.SaveChangesAsync();
+            return new JsonResult("Added Successfully");
+        }
 
         [HttpPut]
         public async Task<IActionResult> Put(Users users)

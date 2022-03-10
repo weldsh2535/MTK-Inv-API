@@ -13,13 +13,12 @@ namespace MTK_Inv.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required]
         public int id { get; set; }
-        [Required]
         public string firstName { get; set; }
-        [Required]
         public string lastName { get; set; }
         [Required]
         public string phonenumber { get; set; }
         public string email { get; set; }
+        [Required]
         public string password { get; set; }
         public string type { get; set; }
         public DateTime registeredAt { get; set; }

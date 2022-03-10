@@ -539,19 +539,25 @@ namespace MTK_Delivery.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("empId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("firstName")
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("userId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("username")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("lastName")
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("phonenumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("registeredAt")
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("type")
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("id");
 

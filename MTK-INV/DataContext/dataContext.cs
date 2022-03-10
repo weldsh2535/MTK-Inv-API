@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MTK_Delivery.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,7 @@ namespace MTK_Inv.Models
         public DbSet<Vendors> Vendors { get; set; }
         public DbSet<CountSheet> CountSheet { get; set; }
         public DbSet<LineItem> LineItem { get; set; }
+        public DbSet<Email> email { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
