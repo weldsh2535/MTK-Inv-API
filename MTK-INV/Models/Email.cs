@@ -8,10 +8,11 @@ namespace MTK_Delivery.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required]
+        public int id { get; set; }
         public string To { get; set; }
         public string Cc { get; set; }
         public string Subject { get; set; }
         public string Text { get; set; }
-        public int userId { get; set; }
+        public string userId { get; set; }
     }
 }

@@ -99,7 +99,8 @@ namespace MTK_Delivery.Migrations
                     email = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     type = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     registeredAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    password = table.Column<string>(type: "nvarchar(50)", nullable: true)
+                    password = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    active = table.Column<bool>(type: "bool", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -481,6 +482,22 @@ namespace MTK_Delivery.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
+            migrationBuilder.CreateTable(
+                name: "Email",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false).Annotation("SqlServer:Identity", "1,1"),
+                    To = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Cc = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Subject = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    userId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                },
+                 constraints: table =>
+                 {
+                     table.PrimaryKey("PK_Email", x => x.id);
+                 });
+       
 
             migrationBuilder.CreateIndex(
                 name: "IX_AddStock_itemId",
@@ -664,6 +681,10 @@ namespace MTK_Delivery.Migrations
 
             migrationBuilder.DropTable(
                 name: "LookupCatagory");
+
+            migrationBuilder.DropTable(
+                name: "Email");
+
         }
     }
 }

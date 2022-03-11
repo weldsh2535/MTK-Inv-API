@@ -32,18 +32,21 @@ namespace MTK_Delivery.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(Email email)
         {
-            string to = "weldshprogramer25@gmail.com"; //To address    
-            string from = "weldetsadik2535@gmail.com"; //From address    
+            string to = email.To;
+            string from = email.Cc;
+            string mailbody = email.Text;
+           // string to = "weldshprogramer25@gmail.com"; //To address    
+           // string from = "weldetsadik2535@gmail.com"; //From address    
             MailMessage message = new MailMessage(from, to);
 
-            string mailbody = "In this article you will learn how to send a email using Asp.Net & C#";
-            message.Subject = "Sending Email Using Asp.Net & C#";
+          //  string mailbody = "In this article you will learn how to send a email using Asp.Net & C#";
+            message.Subject = email.Subject;
             message.Body = mailbody;
             message.BodyEncoding = Encoding.UTF8;
             message.IsBodyHtml = true;
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
             System.Net.NetworkCredential basicCredential1 = new
-            System.Net.NetworkCredential("weldetsadik2535@gmail.com", "naagncagajuicfyn");
+            System.Net.NetworkCredential(from, "naagncagajuicfyn");
             client.EnableSsl = true;
             client.UseDefaultCredentials = false;
             client.Credentials = basicCredential1;
@@ -56,32 +59,9 @@ namespace MTK_Delivery.Controllers
             {
                 throw ex;
             }
-            //var client = new System.Net.Mail.SmtpClient("smtp.example.com", 111);
-            //client.UseDefaultCredentials = false;
-            //client.EnableSsl = true;
-
-            //client.Credentials = new System.Net.NetworkCredential("yourusername", "yourpassword");
-
-            //var mailMessage = new System.Net.Mail.MailMessage();
-            //mailMessage.From = new System.Net.Mail.MailAddress("youremail@example.com");
-
-            //mailMessage.To.Add(email.To);
-
-            //if (!string.IsNullOrEmpty(email.Cc))
-            //{
-            //    mailMessage.CC.Add(email.Cc);
-            //}
-
-            //mailMessage.Body = email.Text;
-
-            //mailMessage.Subject = email.Subject;
-
-            //mailMessage.BodyEncoding = System.Text.Encoding.UTF8;
-            //mailMessage.SubjectEncoding = System.Text.Encoding.UTF8;
-
-            //await client.SendMailAsync(mailMessage);
-
-            return Ok();
-        }
+            _context.Add(email);
+            await _context.SaveChangesAsync();
+            return new JsonResult("Added Successfully");
+           }
     }
 }

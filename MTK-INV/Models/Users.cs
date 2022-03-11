@@ -22,5 +22,6 @@ namespace MTK_Inv.Models
         public string password { get; set; }
         public string type { get; set; }
         public DateTime registeredAt { get; set; }
+        public bool active { get; set; }
     }
 }
