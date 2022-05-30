@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MTK_Inv.Models
 {
-    public class dataContext:DbContext
+    public class dataContext : DbContext
     {
         public dataContext(DbContextOptions<dataContext> options) : base(options)
         {
@@ -23,8 +23,8 @@ namespace MTK_Inv.Models
         public DbSet<ItemCategory> ItemCategory { get; set; }
         public DbSet<Vocher> Vocher { get; set; }
         public DbSet<Users> users { get; set; }
-        public DbSet<ItemLocation> ItemLocation  { get; set; }
-        public DbSet<UserRole> userRole{ get; set; }
+        public DbSet<ItemLocation> ItemLocation { get; set; }
+        public DbSet<UserRole> userRole { get; set; }
         public DbSet<ItemStoreBalance> ItemStoreBalance { get; set; }
         public DbSet<StoreTransfer> storeTransfer { get; set; }
         public DbSet<VocherStoreTransation> vocherStoreTransation { get; set; }
@@ -34,6 +34,7 @@ namespace MTK_Inv.Models
         public DbSet<CountSheet> CountSheet { get; set; }
         public DbSet<LineItem> LineItem { get; set; }
         public DbSet<Email> email { get; set; }
+        public DbSet<paymentHistory> paymentHistories { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))

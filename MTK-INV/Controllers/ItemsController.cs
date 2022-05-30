@@ -65,9 +65,9 @@ namespace MTK_Inv.Controllers
         {
             _context.Add(items);
             await _context.SaveChangesAsync();
-            Items item = new Items();
-            int id = item.id;
-            return new JsonResult(id);
+           /// Items item = new Items();
+           // int id = item.id;
+            return new JsonResult(items.id);
         }
 
         [HttpPut]

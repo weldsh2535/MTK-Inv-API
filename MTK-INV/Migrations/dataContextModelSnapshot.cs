@@ -243,7 +243,9 @@ namespace MTK_Delivery.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
+                    b.Property<string>("itemCode")
+                         .HasMaxLength(50)
+                         .HasColumnType("nvarchar(50)");
                     b.Property<string>("AmaricName")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");

@@ -204,6 +204,7 @@ namespace MTK_Delivery.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    itemCode = table.Column<string>(type: "nvarchar(50)",maxLength:50,nullable:false),
                     name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     AmaricName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     price = table.Column<double>(type: "float", nullable: false),
@@ -459,6 +460,25 @@ namespace MTK_Delivery.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "paymentHistories",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    vocherId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    customerId = table.Column<int>(type: "int", nullable: false),
+                    vendorId = table.Column<int>(type: "int", nullable: false),
+                    paymentStatus = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    amountPaid = table.Column<double>(type: "float", nullable: false),
+                    orderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    balance = table.Column<int>(type: "int", nullable:false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_paymentHistories", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LineItem",
                 columns: table => new
                 {
@@ -684,7 +704,8 @@ namespace MTK_Delivery.Migrations
 
             migrationBuilder.DropTable(
                 name: "Email");
-
+            migrationBuilder.DropTable(
+               name: "paymentHistories");
         }
     }
 }

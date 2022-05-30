@@ -2,11 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>MTK_Delivery</RootNamespace>
+    <RootNamespace>MTK_INV</RootNamespace>
     <UserSecretsId>f776df1b-bb7c-48ab-802e-0d8e26e759e3</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.9" />

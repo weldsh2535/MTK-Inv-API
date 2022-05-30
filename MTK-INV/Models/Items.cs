@@ -13,6 +13,8 @@ namespace MTK_Inv.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required]
         public int id { get; set; }
+        [StringLength(50)]
+        public string itemCode { get; set; }
         [Required]
         [StringLength(50)]
         public string name { get; set; }
